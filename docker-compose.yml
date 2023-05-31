@@ -1,0 +1,36 @@
+#
+# This docker compose file is here as an example, and something that may
+# be used by dev engineers to run their application under docker
+#
+# Developers: 
+#   docker-compose up --build
+# Or start it up in the background with:
+#   docker-compose up --build -d
+# Or all in one go:
+#   mvn clean package && docker-compose up --build
+# Shut it down with:
+#   docker-compose down
+#
+#
+version: "3.8"
+services:
+    postgres:
+      restart: always
+      image: postgres:15.2-alpine3.17
+      ports:
+        - "5433:5432"
+      environment:
+        - DATABASE_HOST=127.0.0.1
+        - POSTGRES_USER=root
+        - POSTGRES_PASSWORD=welcome1
+    
+    pgadmin:
+      image: dpage/pgadmin4
+      environment:
+        - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+        - PGADMIN_DEFAULT_PASSWORD=welcome1
+        - PGADMIN_LISTEN_PORT=8081
+      ports:
+        - "8081:8081"
+      depends_on:
+        - postgres

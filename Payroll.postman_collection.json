@@ -1,0 +1,605 @@
+{
+	"info": {
+		"_postman_id": "3160914b-3b4d-4a17-a944-050ae3886735",
+		"name": "Payroll",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TopupWithdrawal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"amount\": 100,\r\n    \"user_id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/wallet/v1/execute",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wallet",
+						"v1",
+						"execute"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 Topup",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 200,\r\n    \"user_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/wallet/v1/execute",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wallet",
+								"v1",
+								"execute"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"wallet_transaction_id\": 21,\n    \"amount\": 200,\n    \"user_id\": 1\n}"
+				},
+				{
+					"name": "200 Withdrawal",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": -100,\r\n    \"user_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/wallet/v1/execute",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wallet",
+								"v1",
+								"execute"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"wallet_transaction_id\": 22,\r\n    \"amount\": -100,\r\n    \"user_id\": 1\r\n}"
+				},
+				{
+					"name": "400 Error Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \r\n    \"user_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/wallet/v1/execute",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wallet",
+								"v1",
+								"execute"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"code\": \"INVALID_BODY\",\n    \"message\": \"The amount value must not be null\"\n}"
+				},
+				{
+					"name": "400 User Not found",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 200,\r\n    \"user_id\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/wallet/v1/execute",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wallet",
+								"v1",
+								"execute"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"code\": \"INVALID_USER\",\n    \"message\": \"User id 100 not found\"\n}"
+				},
+				{
+					"name": "400 Insufficient Funds",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": -200000,\r\n    \"user_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/wallet/v1/execute",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wallet",
+								"v1",
+								"execute"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"code\": \"INVALID_BODY\",\n    \"message\": \"The id wallet 1 has insufficient funds\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Balance",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"amount\": -310,\r\n    \"user_id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/wallet/v1/balance?user_id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wallet",
+						"v1",
+						"balance"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 Balance",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": -310,\r\n    \"user_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/wallet/v1/balance?user_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wallet",
+								"v1",
+								"balance"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"user_id\": 1,\n    \"balance\": 300\n}"
+				},
+				{
+					"name": "500 Balance",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": -310,\r\n    \"user_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/wallet/v1/balance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wallet",
+								"v1",
+								"balance"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"code\": \"GENERAL_ERROR\",\n    \"message\": \"Required request parameter 'user_id' for method parameter type Long is not present\"\n}"
+				}
+			]
+		},
+		{
+			"name": "CreatePayment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"source\": {\r\n        \"type\": \"COMPANY\",\r\n        \"sourceInformation\": {\r\n            \"name\": \"ONTOP INC\"\r\n        },\r\n        \"account\": {\r\n            \"accountNumber\": \"0245253419\",\r\n            \"currency\": \"USD\",\r\n            \"routingNumber\": \"028444018\"\r\n        }\r\n    },\r\n    \"destination\": {\r\n        \"name\": \"John Doe\",\r\n        \"userId\": 1,\r\n        \"account\": {\r\n            \"accountNumber\": \"5344543\",\r\n            \"currency\": \"USD\",\r\n            \"routingNumber\": \"123456789\"\r\n        }\r\n    },\r\n    \"amount\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/payments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"payments"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 Create Payment",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"source\": {\r\n        \"type\": \"COMPANY\",\r\n        \"sourceInformation\": {\r\n            \"name\": \"ONTOP INC\"\r\n        },\r\n        \"account\": {\r\n            \"accountNumber\": \"0245253419\",\r\n            \"currency\": \"USD\",\r\n            \"routingNumber\": \"028444018\"\r\n        }\r\n    },\r\n    \"destination\": {\r\n        \"name\": \"John Doe\",\r\n        \"userId\": 1,\r\n        \"account\": {\r\n            \"accountNumber\": \"5344543\",\r\n            \"currency\": \"USD\",\r\n            \"routingNumber\": \"123456789\"\r\n        }\r\n    },\r\n    \"amount\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"payments"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"requestInfo\": {\n        \"status\": \"Processing\"\n    },\n    \"paymentInfo\": {\n        \"amount\": 100,\n        \"id\": \"9b17496b-22c0-4a8d-88a1-265316d1271d\"\n    }\n}"
+				},
+				{
+					"name": "400 Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"source\": {\r\n        \"type\": \"OTHER VALUE\",\r\n        \"sourceInformation\": {\r\n            \"name\": \"ONTOP INC\"\r\n        },\r\n        \"account\": {\r\n            \"accountNumber\": \"0245253419\",\r\n            \"currency\": \"USD\",\r\n            \"routingNumber\": \"028444018\"\r\n        }\r\n    },\r\n    \"destination\": {\r\n        \"name\": \"TONY STARK\",\r\n        \"userId\": 1,\r\n        \"account\": {\r\n            \"accountNumber\": \"1885226711\",\r\n            \"currency\": \"USD\",\r\n            \"routingNumber\": \"211927207\"\r\n        }\r\n    },\r\n    \"amount\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"payments"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"error\": \"body is invalid, check postman collection example\"\n}"
+				},
+				{
+					"name": "500 PENDING",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"source\": {\r\n        \"type\": \"COMPANY\",\r\n        \"sourceInformation\": {\r\n            \"name\": \"ONTOP INC\"\r\n        },\r\n        \"account\": {\r\n            \"accountNumber\": \"0245253419\",\r\n            \"currency\": \"USD\",\r\n            \"routingNumber\": \"028444018\"\r\n        }\r\n    },\r\n    \"destination\": {\r\n        \"name\": \"TONY STARK\",\r\n        \"userId\": 1,\r\n        \"account\": {\r\n            \"accountNumber\": \"1885226711\",\r\n            \"currency\": \"USD\",\r\n            \"routingNumber\": \"211927207\"\r\n        }\r\n    },\r\n    \"amount\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"payments"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"code\": \"GENERAL_ERROR\",\n    \"message\": \"Destination information not valid\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GetPayment",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/payments/:paymentId/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"payments",
+						":paymentId",
+						"status"
+					],
+					"variable": [
+						{
+							"key": "paymentId",
+							"value": "673ad390-2ef9-45e9-a696-ad225b61028d"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Completed",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/payments/:paymentId/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"payments",
+								":paymentId",
+								"status"
+							],
+							"variable": [
+								{
+									"key": "paymentId",
+									"value": "a4c64e2c-9f9c-4a7f-b690-0d6c249e6f5b"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"status\": \"Completed\",\n    \"date\": \"03/23/2023 18:51:52\"\n}"
+				},
+				{
+					"name": "Failed",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/payments/:paymentId/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"payments",
+								":paymentId",
+								"status"
+							],
+							"variable": [
+								{
+									"key": "paymentId",
+									"value": "24a33412-53d1-47ee-b1d9-9f2f2a8c647d"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"status\": \"Failed\",\n    \"date\": \"03/23/2023 16:51:52\"\n}"
+				},
+				{
+					"name": "Processing",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/payments/:paymentId/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"payments",
+								":paymentId",
+								"status"
+							],
+							"variable": [
+								{
+									"key": "paymentId",
+									"value": "7bda846f-1e7a-4c2d-8b25-f3fdd3c9d3f3"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"status\": \"Processing\",\n    \"date\": \"03/23/2023 14:51:52\"\n}"
+				},
+				{
+					"name": "500 Transaction not found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/payments/:paymentId/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"payments",
+								":paymentId",
+								"status"
+							],
+							"variable": [
+								{
+									"key": "paymentId",
+									"value": "7bda846f-1e7a-4c2d-8b25-f3fdd3c9d3f"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"code\": \"GENERAL_ERROR\",\r\n    \"message\": \"Provider transaction with id 7bda846f-1e7a-4c2d-8b25-f3fdd3c9d3f not found\"\r\n}"
+				}
+			]
+		}
+	]
+}
